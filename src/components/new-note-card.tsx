@@ -8,6 +8,10 @@ export function NewNoteCard() {
     setShouldShowOnboarding(false)
   }
 
+  function handleContentChanged() {
+    console.log("a")
+  }
+
   return (
     <Dialog.Root>
       <Dialog.Trigger className="rounded-md flex flex-col bg-slate-700 text-left p-5 gap-3 outline-none hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-lime-400">
@@ -39,6 +43,7 @@ export function NewNoteCard() {
                 </button>{" "}
                 em áudio ou se preferir{"  "}
                 <button
+                  onClick={handleStartEditor}
                   type="button"
                   className="font-medium text-lime-400 hover:underline"
                 >
@@ -47,7 +52,11 @@ export function NewNoteCard() {
                 .
               </p>
             ) : (
-              <p>Editor</p>
+              <textarea
+                autoFocus
+                className="text-sm leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none"
+                onChange={handleContentChanged}
+              />
             )}
           </div>
           <button
