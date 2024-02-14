@@ -33,11 +33,16 @@ export function App() {
   }
 
   function handleSearch(event: ChangeEvent<HTMLInputElement>) {
-    const query = event.target.value.toLowerCase()
+    const query = event.target.value
     setSearch(query)
   }
 
-  console.log(search)
+  const filteredNotes =
+    search != ""
+      ? notes.filter((note) =>
+          note.content.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        )
+      : notes
 
   return (
     <div className="mx-auto max-w-6xl my-12 space-y-6">
@@ -53,7 +58,7 @@ export function App() {
       <div className="h-px bg-slate-700" />
       <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
         <NewNoteCard onNoteCreated={onNoteCreated} />
-        {notes.map((note) => {
+        {filteredNotes.map((note) => {
           return <NoteCard key={note.id} note={note} />
         })}
       </div>
